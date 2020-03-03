@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { useState, useEffect } from 'react';
 import { Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 import axios from 'axios';
@@ -18,19 +19,17 @@ export const Login = (props) => {
     let [userSignUp, setUserSignUp] = useState({username: '', email: '', password: ''}); 
     let [returnUser, setReturnUser] = useState(null);
 
-    let URL = 'http://pintereach1.herokuapp.com/api/';
+    let URL = 'https://pintereach1.herokuapp.com/api/';
 
 useEffect(() => {
     let user = window.localStorage.getItem('pintereachUser') ? window.localStorage.getItem('pintereachUser') : null;
-    console.log(user);
     if (user !== null) setReturnUser(user.username);
-    
-    
 },[]);
 
 const test = () => {
     console.log(returnUser);
 }
+
 useEffect(() => {
     switch(api) {
         case 'login':
@@ -40,8 +39,8 @@ useEffect(() => {
                 window.localStorage.setItem('pintereachAuth', res.data.token);
                 window.localStorage.setItem('pintereachUser', res.data.user);
                 props.setLoggedIn(true);
-                // props.history.push('/dashboard');
-                // props.history.go();
+                props.history.push('/dashboard');
+                props.history.go();
             })
             .catch(err => {
                 console.log(err);
@@ -55,8 +54,8 @@ useEffect(() => {
                 window.localStorage.setItem('pintereachAuth', res.data.token);
                 window.localStorage.setItem('pintereachUser', res.data.user);
                 props.setLoggedIn(true);
-                // props.history.push('/dashboard');
-                // props.history.go();
+                props.history.push('/dashboard');
+                props.history.go();
             })
             .catch(err => {
                 console.log(err);
