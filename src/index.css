@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.sign-out-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
