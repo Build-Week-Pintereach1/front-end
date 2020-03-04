@@ -77,8 +77,8 @@ useEffect(() => {
 	return (
         <div>
 
-            {props.user !== null && <h1>Welcome Back {props.user}!</h1>}
-            {props.user === null && <h1>Welcome Back!</h1>}
+            {props.user !== null && <h1 className='welcomeback'>Welcome Back {props.user}!</h1>}
+            {props.user === null && <h1 className='welcomeback'>Welcome Back!</h1>}
 {form === 'login' &&	
 <div>
     <form className='login-form' onSubmit={handleSignIn}>
@@ -94,7 +94,7 @@ useEffect(() => {
             </InputGroupAddon>
             <Input placeholder='password' type='password' onChange={updateLoginPassword}/>
 		</InputGroup>
-        <button type='submit' className='btn btn-primary'>Login</button>
+        <button type='submit' className='buttonsubmit' >Login</button>
     </form>
 
     </div>
@@ -120,13 +120,16 @@ useEffect(() => {
             </InputGroupAddon>
             <Input placeholder='password' type='password' onChange={updateSignupPassword}/>
         </InputGroup>
-        <button className='btn btn-primary' type='submit'>Signup</button>
+        <button className='buttonsubmit'  type='submit'>Signup</button>
     </form>
     
     </div>
 }
-    <button className='btn btn-primary' onClick={()=> setForm('login')} disabled={form==='login'}>Login</button>
-    <button className='btn btn-primary' onClick={()=> setForm('signup')} disabled={form==='signup'}>Sign Up</button>
+   <div className='buttonswitchdiv'>
+    <button className='buttonswitch' onClick={()=> setForm('login')} disabled={form==='login'}>Login</button>
+    <button className='buttonswitch2' onClick={()=> setForm('signup')} disabled={form==='signup'}>Sign Up</button>
+   
+    </div>
     </div>
 	);
 };

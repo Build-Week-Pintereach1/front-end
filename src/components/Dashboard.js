@@ -42,8 +42,8 @@ export const Dashboard = (props) => {
     return (
         <div>
             <button className='btn btn-primary sign-out-btn' onClick={signOut}>Sign Out</button>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, quia!</p>
-            <form onSubmit={handleLink}>
+            <p className='articlelinktext'>Copy and paste article link below to add your articles!</p>
+            <form className='savearticleform' onSubmit={handleLink}>
                 <InputGroup>
                     <InputGroupAddon addonType='prepend'>
                         <InputGroupText></InputGroupText>
@@ -51,9 +51,9 @@ export const Dashboard = (props) => {
                     <Input name='linkInput' placeholder='Article Link' type='text' onChange={updateLink}/>
                     <button type='submit' className='btn btn-primary'>Save Article</button>
                 </InputGroup>
-
-                <Article newArticle={newArticle}/>
-
+            
+                <Article  newArticle={newArticle}/>
+               
             </form>
         </div>
     )
