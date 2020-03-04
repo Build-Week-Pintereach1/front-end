@@ -1,63 +1,46 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle
+    CardTitle
   } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import {axiosWithAuth} from './AxiosAuth';
 
-const articles = [
-  {
-    Url: '#',
-    Title: 'Title 1',
-    Subtitle: 'Subtitle',
-    Text: 'Dummy text',
-    Image: '',
-    Category: ['other']
-  },
-  {
-    Url: '#',
-    Title: 'Title 2',
-    Subtitle: 'Subtitle',
-    Text: 'Dummy text',
-    Image: '',
-    Category: ['geology']
-  },
-  {
-    Url: '#',
-    Title: 'Title 3',
-    Subtitle: 'Subtitle',
-    Text: 'Dummy text',
-    Image: '',
-    Category: ['chemistry', 'biology','other']
-  },
-  {
-    Url: '#',
-    Title: 'Title 4',
-    Subtitle: 'Subtitle',
-    Text: 'Dummy text',
-    Image: '',
-    Category: ['chemistry', 'other']
-  }
-]
 
 export const Article = (props) => {
+
+
+  let [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth().get('articles')
+    .then(res => {
+      console.log(res);
+      setArticles(res.data);
+    }).catch(err => {
+      console.log(err);
+    })
+  },[]);
+useEffect(() => {
+  if (props.newArticle.length > 0) {
+    setArticles(props.newArticle);
+  }
+},[props.newArticle])
 
   return (
     <div>
     {articles.map(item => (
-      <div>
-        <Link to={item.Url}>
+      <div key={item.id}>
+        <a href={item.url} target='_blank'>
         <Card>
-          <CardImg top width="100%" src={item.Image} alt="Card image cap" />
+          <CardImg className='article-img' top src={item.image} alt="Card image cap" />
           <CardBody>
-            <CardTitle>{item.Title}</CardTitle>
-            <CardSubtitle>{item.Subtitle}</CardSubtitle>
-            <CardText>{item.Text}</CardText>
+            <CardTitle>{item.title}</CardTitle>
+            <CardText>{item.description}</CardText>
           </CardBody>
         </Card>
-        </Link>
+        </a>
         <div>
-          {item.Category.map(cat => <p>#{cat}</p>)}
+          {item.categories.map(cat => <p key={cat}>#{cat}</p>)}
         </div>
       </div>
     ))}

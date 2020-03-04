@@ -13,32 +13,36 @@ function App() {
 
 let history = useHistory();
 
-
-  let [user, setUser] = useState();
-  let [token, setToken] = useState();
-  let [loggedIn, setLoggedIn] = useState(false);
+  let [user, setUser] = useState(null);
+  let [token, setToken] = useState(false);
+  let [loggedIn, setLoggedIn] = useState(null);
 
   useEffect(() => {
     let user = window.localStorage.getItem('pintereachUser') ? window.localStorage.getItem('pintereachUser') : null;
+    if (user !== null) setUser(user);
     axiosWithAuth().get('/validate').then(res => 
-      setToken(window.localStorage.getItem('pintereachAuth')) 
-    ).catch(err => {
-      console.log(err);
-      setToken(null);
-      window.localStorage.removeItem('pintereachAuth');
+      setToken(window.localStorage.getItem('pintereachAuth')),
+      setLoggedIn(true),
+      ).catch(err => {
+      console.log(err)
+      setToken(null)
+      window.localStorage.removeItem('pintereachAuth')
+      setLoggedIn(false)
     });
-    // setUser(user.username);
+
+
   },[])
 
     const PrivateRoute = ({ component: Component, ...rest}) => (
       <Route {...rest} render={(props) => (
-        token !== null && token !== undefined
+        typeof token === "string"
         ? <Component {...props} history={history} user={user} setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
         : <Redirect to='/'/>
       )}/>
     )
 
     const PublicRoute = ({ component: Component, ...rest}) => (
+
       <Route {...rest} render={(props) => (
         typeof token === "string"
         ? <Redirect to='/dashboard'/>
