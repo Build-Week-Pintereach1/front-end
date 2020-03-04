@@ -6,9 +6,14 @@ import { Article } from './Article';
 
 export const Dashboard = (props) => {
 
-    let [link, setLink] = useState();
-    let [dependency, setDependency] = useState();
+    let [link, setLink] = useState('');
     let [newArticle, setNewArticle] = useState([]);
+    let [invalid, setInvalid] = useState(false);
+    let [categories, setCategories] = useState([]);
+    let [newCat, setNewCat] = useState('');
+
+    let [catDependency, setCatDependency] = useState();
+    let [dependency, setDependency] = useState();
 
 
     let signOut = () => {
@@ -28,8 +33,20 @@ export const Dashboard = (props) => {
         setDependency(Math.random() * 5);
     }
 
-    useEffect(() => {
-        console.log(link);
+    let createCategory = (e) => {
+        e.preventDefault();
+        setCatDependency(newCat);
+    }
+
+    let updateCategory = (e) => {
+        setNewCat(e.target.value);
+    }
+
+
+    useEffect(() => { //CREATE ARTICLE
+        if (link === '') return;
+        if (link.includes('http') && link.includes('://') || link.includes('www.')) {
+            setInvalid(false);
         axiosWithAuth().post('articles', {'url': link})
         .then(res => {
             console.log(res);
@@ -37,7 +54,44 @@ export const Dashboard = (props) => {
         }).catch(err => {
             console.log(err);
         })
+    } else {
+        setInvalid(true);
+    }
+
     },[dependency])
+
+    useEffect(() => { //GET CATEGORIES
+        axiosWithAuth().get('categories')
+        .then(res => {
+            console.log('CATEGORIES: ',res)
+            setCategories(res.data);
+
+        }).catch(err => {
+            console.log(err)
+        });
+    },[]);
+
+    useEffect(() => { //ADD CATEGORY
+        console.log(newCat);
+        axiosWithAuth().post('categories', {'name': newCat})
+        .then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err)
+        }) 
+    },[catDependency]);
+
+    let deleteCat = (e) => {
+        console.log(e.currentTarget.value);
+        axiosWithAuth().delete(`categories/${e.currentTarget.value}`)
+        .then(res => {
+            setCategories(res.data)
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+
 
     return (
         <div>
@@ -48,12 +102,27 @@ export const Dashboard = (props) => {
                     <InputGroupAddon addonType='prepend'>
                         <InputGroupText></InputGroupText>
                     </InputGroupAddon>
-                    <Input name='linkInput' placeholder='Article Link' type='text' onChange={updateLink}/>
+                    <Input placeholder='Article Link' onChange={updateLink}/>
+                    {invalid && <p className='link-error'>Invalid Link!</p>}
                     <button type='submit' className='buttonsubmit'>Save Article</button>
                 </InputGroup>
-            
-                <Article  newArticle={newArticle}/>
                </form>
+
+                <div className='categories'>
+                    <form onSubmit={createCategory}>
+                        <Input placeholder='Create Category' onChange={updateCategory}/>
+                        <button type='submit'>Submit</button>
+                        <ul>
+                            {categories.map(cat => (
+                            <>
+                            <li key={cat.id}>#{cat.name}</li> <button value={cat.id} onClick={deleteCat}><i className='material-icons'>clear</i></button>
+                            </>
+                            ))}
+                        </ul>
+                    </form>
+                </div>
+
+               <Article  newArticle={newArticle} categories={categories}/>
 
                   <footer>
         <p className='footertext'>&copy; 2020 Pintereach</p>
