@@ -17,3 +17,9 @@ code {
   top: 15px;
   right: 15px;
 }
+
+.card > img {
+
+  height: 20rem;
+  width: 30rem;
+}

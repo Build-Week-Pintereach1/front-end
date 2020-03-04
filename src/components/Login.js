@@ -1,34 +1,16 @@
 /* eslint-disable default-case */
 import React, { useState, useEffect } from 'react';
-import { Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
+import { Input, InputGroup, InputGroupAddon, InputGroupText} from 'reactstrap';
 import axios from 'axios';
 
 export const Login = (props) => {
-
-// email: ""
-// ​​​
-// id: int
-// ​​​
-// password: ""
-// ​​​
-// username: ""
 
     let [form, setForm] = useState('login');
     let [api, setApi] = useState('');
     let [userLogin, setUserLogin] = useState({username: '', password: ''});
     let [userSignUp, setUserSignUp] = useState({username: '', email: '', password: ''}); 
-    let [returnUser, setReturnUser] = useState(null);
 
     let URL = 'https://pintereach1.herokuapp.com/api/';
-
-useEffect(() => {
-    let user = window.localStorage.getItem('pintereachUser') ? window.localStorage.getItem('pintereachUser') : null;
-    if (user !== null) setReturnUser(user.username);
-},[]);
-
-const test = () => {
-    console.log(returnUser);
-}
 
 useEffect(() => {
     switch(api) {
@@ -37,7 +19,7 @@ useEffect(() => {
             .then(res => {
                 console.log(res);
                 window.localStorage.setItem('pintereachAuth', res.data.token);
-                window.localStorage.setItem('pintereachUser', res.data.user);
+                window.localStorage.setItem('pintereachUser', res.data.user.username);
                 props.setLoggedIn(true);
                 props.history.push('/dashboard');
                 props.history.go();
@@ -52,7 +34,7 @@ useEffect(() => {
             .then(res => {
                 console.log(res);
                 window.localStorage.setItem('pintereachAuth', res.data.token);
-                window.localStorage.setItem('pintereachUser', res.data.user);
+                window.localStorage.setItem('pintereachUser', res.data.user.username);
                 props.setLoggedIn(true);
                 props.history.push('/dashboard');
                 props.history.go();
@@ -94,9 +76,9 @@ useEffect(() => {
 
 	return (
         <div>
-            <button onClick={()=> test()}>Test</button>
-            {returnUser !== null && <h1>Welcome Back {returnUser}!</h1>}
-            {returnUser === null && <h1>Welcome Back!</h1>}
+
+            {props.user !== null && <h1>Welcome Back {props.user}!</h1>}
+            {props.user === null && <h1>Welcome Back!</h1>}
 {form === 'login' &&	
 <div>
     <form className='login-form' onSubmit={handleSignIn}>
