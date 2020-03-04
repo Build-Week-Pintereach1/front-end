@@ -5,7 +5,8 @@ export const axiosWithAuth = (url) => {
         return axios.create({
             headers:{
                 'Content-Type': 'application/json',
-                'authorization': `${token}`
+                'authorization': `${token}`,
+
             },
             baseURL: 'https://pintereach1.herokuapp.com/api/'
         })
