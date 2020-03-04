@@ -27,9 +27,7 @@ let history = useHistory();
       setToken(null);
       window.localStorage.removeItem('pintereachAuth');
     });
-    setUser(user.username);
-    let x = () => window.localStorage.getItem('pintereachAuth') ? setLoggedIn(true) : null;
-    x();
+    // setUser(user.username);
   },[])
 
     const PrivateRoute = ({ component: Component, ...rest}) => (
@@ -51,15 +49,22 @@ let history = useHistory();
     
   return (
     <div>
-       {token}
-    <Switch>
-     
-      <PublicRoute exact path='/' component={Login}/>
-      <PrivateRoute path='/dashboard' component={Dashboard}/>
+      <header>
+        <h1>Lorem ipsum dolor sit amet.</h1>
+      </header>
 
-    <Route></Route>
-    </Switch>
-</div>
+      <Switch>
+      
+        <PublicRoute exact path='/' component={Login}/>
+        <PrivateRoute path='/dashboard' component={Dashboard}/>
+
+      <Route></Route>
+      </Switch>
+      
+      <footer>
+        <p>&copy; 2020 Pintereach</p>
+      </footer>
+    </div>
   );
 }
 
