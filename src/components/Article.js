@@ -34,8 +34,8 @@ useEffect(() => {
         <Card className='articlecard'>
           <CardImg className='article-img' top src={item.image} alt="Card image cap" />
           <CardBody>
-            <CardTitle>{item.title}</CardTitle>
-            <CardText>{item.description}</CardText>
+            <CardTitle className='cardtitle'>{item.title}</CardTitle>
+            <CardText className='cardtext'>{item.description}</CardText>
           </CardBody>
         </Card>
         </a>

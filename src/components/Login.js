@@ -126,10 +126,12 @@ useEffect(() => {
     </div>
 }
    <div className='buttonswitchdiv'>
-    <button className='buttonswitch' onClick={()=> setForm('login')} disabled={form==='login'}>Login</button>
-    <button className='buttonswitch2' onClick={()=> setForm('signup')} disabled={form==='signup'}>Sign Up</button>
-   
-    </div>
+        <button className='buttonswitch' onClick={()=> setForm('login')} disabled={form==='login'}>Login</button>
+        <button className='buttonswitch2' onClick={()=> setForm('signup')} disabled={form==='signup'}>Sign Up</button>
+   </div>
+    <footer className='loginfooter'>
+        <p className='footertext'>&copy; 2020 Pintereach</p>
+     </footer>
     </div>
 	);
 };

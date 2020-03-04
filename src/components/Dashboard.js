@@ -49,12 +49,16 @@ export const Dashboard = (props) => {
                         <InputGroupText></InputGroupText>
                     </InputGroupAddon>
                     <Input name='linkInput' placeholder='Article Link' type='text' onChange={updateLink}/>
-                    <button type='submit' className='btn btn-primary'>Save Article</button>
+                    <button type='submit' className='buttonsubmit'>Save Article</button>
                 </InputGroup>
             
                 <Article  newArticle={newArticle}/>
-               
-            </form>
+               </form>
+
+                  <footer>
+        <p className='footertext'>&copy; 2020 Pintereach</p>
+      </footer>
+            
         </div>
     )
 }
