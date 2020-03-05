@@ -52,7 +52,7 @@ let history = useHistory();
 
     
   return (
-    <div>
+  <div>
       <header>
         <h1>Pintereach</h1>
       </header>
@@ -65,9 +65,7 @@ let history = useHistory();
       <Route></Route>
       </Switch>
      
-   
-    
-    </div>
+   </div>
   );
 }
 
