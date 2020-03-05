@@ -11,3 +11,9 @@
 1. You should now be able to work on the project.
 
 Once you are ready to view changes on your version of the project, run `npm start` in your CLI (which should be pointed at the project folder) to pull up a local server of the React app.
+
+### General structure of the code.
+The app begins in index.js, where we render our App.js which holds all of the components.
+
+From App.js we have Login.js and Dashboard.js components. The former holds login and registration forms and handlers, while the latter holds the code for saving articles. In Dashboard.js we are pulling in the Article.js component, which itself also pulls in the AddCategory.js component.
+The Article.js component will build the general structure for the entire articles list as well as dynamically render articles which have been stored in the backend. The AddCategory.js component holds logic for assigning categories to individual articles.
