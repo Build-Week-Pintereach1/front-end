@@ -64,7 +64,10 @@ let history = useHistory();
 
       <Route></Route>
       </Switch>
-     
+      
+      <footer className='footer'>
+        <p className='footertext'>&copy; 2020 Pintereach</p>
+     </footer>
    </div>
   );
 }

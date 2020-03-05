@@ -90,23 +90,30 @@ export const Dashboard = (props) => {
 
     return (
         <div>
-            <button className='btn btn-primary sign-out-btn' onClick={signOut}>Sign Out</button>
-            <p className='articlelinktext'>Copy and paste article link below to add your articles!</p>
+            <div className='dashboardinputs'>
+            <div>
+            <button className='btn sign-out-btn' onClick={signOut}>Sign Out</button>
+            <h3 className='articlelinktext'>Copy and paste article link below to add your articles!</h3>
             <form className='savearticleform' onSubmit={handleLink}>
                 <InputGroup>
                     <InputGroupAddon addonType='prepend'>
-                        <InputGroupText></InputGroupText>
+                        <InputGroupText>&#9939;</InputGroupText>
                     </InputGroupAddon>
                     <Input placeholder='Article Link' onChange={updateLink}/>
                     {invalid && <p className='link-error'>Invalid Link!</p>}
-                    <button type='submit' className='buttonsubmit'>Save Article</button>
+                    <button type='submit' className='buttonsubmitdash'>Submit</button>
                 </InputGroup>
                </form>
-
+               </div>
                 <div className='categories'>
                     <form onSubmit={createCategory}>
+                    <InputGroup>
+                    <InputGroupAddon addonType='prepend'>
+                        <InputGroupText>&#x1f5c4;</InputGroupText>
+                    </InputGroupAddon>
                         <Input placeholder='Create Category' onChange={updateCategory}/>
-                        <button type='submit'>Submit</button>
+                       <button type='submit' className='buttonsubmitdash'>Submit</button>
+                       </InputGroup>
                         <ul>
                             {categories.map(cat => (
                             <div key={cat.id+1}>
@@ -114,14 +121,13 @@ export const Dashboard = (props) => {
                             </div>
                             ))}
                         </ul>
+                       
                     </form>
                 </div>
-
+                </div>
                <Article  newArticle={newArticle} categories={categories}/>
 
-                  <footer>
-        <p className='footertext'>&copy; 2020 Pintereach</p>
-      </footer>
+    
             
         </div>
     )
