@@ -4,7 +4,7 @@ import {
     CardTitle
   } from 'reactstrap';
 import {axiosWithAuth} from './AxiosAuth';
-
+import AddCategory from './AddCategory';
 
 export const Article = (props) => {
 
@@ -57,6 +57,8 @@ export const Article = (props) => {
   return (
     <div>
     {articles.map(item => (
+      <>
+
       <div key={item.id}>
         <a href={item.url} target='_blank'>
         <Card className='articlecard'>
@@ -82,6 +84,10 @@ export const Article = (props) => {
         </div>
         <button type='button' onClick={deleteArticle} value={item.id}>Delete</button>
       </div>
+
+      <AddCategory categories={props.categories} articleId={item.id} />
+
+      </>
     ))}
     </div>
   )
