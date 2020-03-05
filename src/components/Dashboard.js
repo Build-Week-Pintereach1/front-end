@@ -49,7 +49,6 @@ export const Dashboard = (props) => {
             setInvalid(false);
         axiosWithAuth().post('articles', {'url': link})
         .then(res => {
-            console.log(res);
             setNewArticle(res.data.articles);
         }).catch(err => {
             console.log(err);
@@ -63,26 +62,22 @@ export const Dashboard = (props) => {
     useEffect(() => { //GET CATEGORIES
         axiosWithAuth().get('categories')
         .then(res => {
-            console.log('CATEGORIES: ',res)
             setCategories(res.data);
-
         }).catch(err => {
             console.log(err)
         });
     },[]);
 
     useEffect(() => { //ADD CATEGORY
-        console.log(newCat);
         axiosWithAuth().post('categories', {'name': newCat})
         .then(res => {
-            console.log(res)
+            categories.push(res.data)
         }).catch(err => {
             console.log(err)
         }) 
     },[catDependency]);
 
     let deleteCat = (e) => {
-        console.log(e.currentTarget.value);
         axiosWithAuth().delete(`categories/${e.currentTarget.value}`)
         .then(res => {
             setCategories(res.data)
@@ -114,9 +109,9 @@ export const Dashboard = (props) => {
                         <button type='submit'>Submit</button>
                         <ul>
                             {categories.map(cat => (
-                            <>
-                            <li key={cat.id}>#{cat.name}</li> <button value={cat.id} onClick={deleteCat}><i className='material-icons'>clear</i></button>
-                            </>
+                            <div key={cat.id+1}>
+                            <li key={cat.id}>#{cat.name}</li> < button value={cat.id} key={cat.name} onClick={deleteCat}><i className='material-icons'>clear</i></button>
+                            </div>
                             ))}
                         </ul>
                     </form>

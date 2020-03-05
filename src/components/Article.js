@@ -10,7 +10,7 @@ export const Article = (props) => {
 
 
   let [articles, setArticles] = useState([]);
-  let [cat, setCat] = useState({});
+
 
   useEffect(() => {
     axiosWithAuth().get('articles')
@@ -40,24 +40,11 @@ export const Article = (props) => {
     })
   }
 
-  let selectCategory = (e) => {
-    setCat(e.currentTarget.value);
-  }
 
-  let addCategory = (e) => {
-    e.preventDefault();
-    console.log(cat);
-    axiosWithAuth().post(`categories/${cat.cat_id}/articles`, cat.article_id)
-    .then(res => {
-      console.log(res);
-    }).catch(err => {
-      console.log(err);
-    });
-  }
   return (
     <div>
     {articles.map(item => (
-      <>
+      <div key={item.id+2}>
 
       <div key={item.id}>
         <a href={item.url} target='_blank'>
@@ -71,23 +58,14 @@ export const Article = (props) => {
         </a>
 
         <div className='cat-menu'>
-          <form onSubmit={() => addCategory}>
-            <select name='selector' onChange={selectCategory}>
-              <option disabled>Select A Category</option>
-              {props.categories.map(cat => (
-                <option name='' value={cat.id} articlevalue={item.id}>{cat.name}</option>
-              ))}
-            </select>
-            <button type='submit'>Add Category</button>
-          </form>
-          {item.categories.map(cat => <p key={cat}>#{cat}</p>)}
+          {item.categories.map(cat => <p key={cat.id}>#{cat}</p>)}
         </div>
         <button type='button' onClick={deleteArticle} value={item.id}>Delete</button>
       </div>
 
       <AddCategory categories={props.categories} articleId={item.id} />
 
-      </>
+      </div>
     ))}
     </div>
   )
