@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from './AxiosAuth';
 import { InputGroup, InputGroupAddon } from 'reactstrap';
 
 const AddCategory = ({ categories, articleId }) => {
-  const [newCatId, setNewCatId] = useState('');
+  const [newCatId, setNewCatId] = useState(categories.length > 0 ? categories[0].id : '');
 
   const handleAdd = evt => {
     evt.preventDefault();
@@ -22,6 +22,10 @@ const AddCategory = ({ categories, articleId }) => {
   const handleChange = evt => {
     setNewCatId(evt.target.value);
   };
+
+
+
+
 
   return (
     <InputGroup  className='catdiv'>
