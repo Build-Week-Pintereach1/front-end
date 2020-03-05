@@ -42,28 +42,35 @@ export const Article = (props) => {
 
 
   return (
-    <div>
+    <div className='articleparent'>
     {articles.map(item => (
       <div key={item.id+2}>
 
-      <div key={item.id}>
-        <a href={item.url} target='_blank'>
+      <div  key={item.id}>
         <Card className='articlecard'>
-          <CardImg className='article-img' top src={item.image} alt="Card image cap" />
-          <CardBody>
-            <CardTitle className='cardtitle'>{item.title}</CardTitle>
-            <CardText className='cardtext'>{item.description}</CardText>
-          </CardBody>
-        </Card>
-        </a>
-
-        <div className='cat-menu'>
+        <AddCategory categories={props.categories} articleId={item.id} />
+          <div >
           {item.categories.map(cat => <p key={cat.id}>#{cat}</p>)}
         </div>
-        <button type='button' onClick={deleteArticle} value={item.id}>Delete</button>
+            <a className='anchor' href={item.url} target='_blank'>
+          <CardImg className='article-img' top src={item.image} alt="Card image cap" />
+            </a>
+          <CardBody >
+            <h3>Title</h3>
+            <CardTitle className='cardtitle'>{item.title}</CardTitle>
+            <h3>Description</h3>
+            <CardText className='cardtext'>{item.description}</CardText>
+          </CardBody>
+          {/* <AddCategory categories={props.categories} articleId={item.id} />
+          <div className='cat-menu'>
+          {item.categories.map(cat => <p key={cat.id}>#{cat}</p>)}
+        </div> */}
+        <button className='deletebutton' type='button' onClick={deleteArticle} value={item.id}>Delete</button>
+       
+        </Card>
       </div>
 
-      <AddCategory categories={props.categories} articleId={item.id} />
+   
 
       </div>
     ))}

@@ -52,7 +52,7 @@ let history = useHistory();
 
     
   return (
-    <div>
+  <div>
       <header>
         <h1>Pintereach</h1>
       </header>
@@ -64,10 +64,11 @@ let history = useHistory();
 
       <Route></Route>
       </Switch>
-     
-   
-    
-    </div>
+      
+      <footer className='footer'>
+        <p className='footertext'>&copy; 2020 Pintereach</p>
+     </footer>
+   </div>
   );
 }
 

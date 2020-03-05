@@ -80,19 +80,21 @@ useEffect(() => {
             {props.user !== null && <h1 className='welcomeback'>Welcome Back {props.user}!</h1>}
             {props.user === null && <h1 className='welcomeback'>Welcome Back!</h1>}
 {form === 'login' &&	
-<div>
+<div className='login'>
     <form className='login-form' onSubmit={handleSignIn}>
+       
         <InputGroup>
 			<InputGroupAddon addonType='prepend'>
 				<InputGroupText>#</InputGroupText>
 			</InputGroupAddon>
-			<Input placeholder='Username' type='text' onChange={updateLoginUsername}/>
+			<Input className='logininputs' placeholder='Username' type='text' onChange={updateLoginUsername}/>
 		</InputGroup>
+       
         <InputGroup>
 			<InputGroupAddon addonType='prepend'>
 				<InputGroupText>*</InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='password' type='password' onChange={updateLoginPassword}/>
+            <Input className='logininputs' placeholder='password' type='password' onChange={updateLoginPassword}/>
 		</InputGroup>
         <button type='submit' className='buttonsubmit' >Login</button>
     </form>
@@ -100,25 +102,25 @@ useEffect(() => {
     </div>
 }
 {form === 'signup' && 
-<div>
+<div className='login'>
     <form className='login-form' onSubmit={handleRegister}>
         <InputGroup>
             <InputGroupAddon addonType='prepend'>
                 <InputGroupText>#</InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='Username' type='text' onChange={updateSignupUsername}/>
+            <Input className='logininputs' placeholder='Username' type='text' onChange={updateSignupUsername}/>
         </InputGroup>
         <InputGroup>
             <InputGroupAddon addonType='prepend'>
                 <InputGroupText>@</InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='Email Address' type='email' onChange={updateSignupEmail}/>
+            <Input className='logininputs' placeholder='Email Address' type='email' onChange={updateSignupEmail}/>
         </InputGroup>
         <InputGroup>
             <InputGroupAddon addonType='prepend'>
                 <InputGroupText>*</InputGroupText>
             </InputGroupAddon>
-            <Input placeholder='password' type='password' onChange={updateSignupPassword}/>
+            <Input className='logininputs' placeholder='password' type='password' onChange={updateSignupPassword}/>
         </InputGroup>
         <button className='buttonsubmit'  type='submit'>Signup</button>
     </form>
@@ -129,9 +131,7 @@ useEffect(() => {
         <button className='buttonswitch' onClick={()=> setForm('login')} disabled={form==='login'}>Login</button>
         <button className='buttonswitch2' onClick={()=> setForm('signup')} disabled={form==='signup'}>Sign Up</button>
    </div>
-    <footer className='loginfooter'>
-        <p className='footertext'>&copy; 2020 Pintereach</p>
-     </footer>
+   
     </div>
 	);
 };

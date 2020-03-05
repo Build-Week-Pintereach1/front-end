@@ -24,8 +24,8 @@ const AddCategory = ({ categories, articleId }) => {
   };
 
   return (
-    <InputGroup>
-      <select onChange={handleChange}>
+    <InputGroup  className='catdiv'>
+      <select className='categoryselector' onChange={handleChange}>
         <option disabled>Choose a category</option>
         {categories.map(category => (
           <option key={category.id} value={category.id}>{category.name}</option>
