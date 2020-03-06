@@ -2,7 +2,7 @@
 ## Save Articles and Categorize Them For Later
 
 A live version of this website can be found at:
-`https://build-week-pintereach1.github.io/front-end/#/`
+`https://build-week-pintereach1.github.io/front-end/`
 
 ### To install this project locally;
 
